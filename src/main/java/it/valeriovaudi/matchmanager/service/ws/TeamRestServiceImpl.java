@@ -9,6 +9,8 @@ import it.valeriovaudi.matchmanager.support.factory.JsonSingleResoltFactory;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,16 +37,18 @@ public class TeamRestServiceImpl implements TeamRestService{
 
     @Override
     public String getAllTeamName(String userNamePlayer) {
+        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+
         Giocatore byUserName = giocatoreDAO.findByUserName(userNamePlayer);
         List<Squadra> byReferente = squadraDAO.findByReferente(byUserName);
 
         for (Squadra squadra : byReferente) {
-            arrayBuilder.add(Json.createObjectBuilder()
-                    .add("teamName", squadra.getNome()));
+            arrayBuilder.add(squadra.getNome());
         }
+        objectBuilder.add("teams",arrayBuilder.build());
 
-        return arrayBuilder.build().toString();
+        return objectBuilder.build().toString();
     }
 
 

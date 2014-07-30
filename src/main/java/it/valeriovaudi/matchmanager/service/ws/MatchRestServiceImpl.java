@@ -14,10 +14,7 @@ import org.activiti.engine.impl.util.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonBuilderFactory;
+import javax.json.*;
 import javax.ws.rs.QueryParam;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -81,14 +78,21 @@ public class MatchRestServiceImpl implements MatchRestService {
     }
 
     @Override
-    public List<String> getAllAviableFootballFields(String date, String hour) {
-        List<String> avaibleFootballFields = new ArrayList();
+    public String getAllAviableFootballFields(String date, String hour) {
+        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         try {
-            avaibleFootballFields = matchUtility.getAvaibleFootballFields(partitaDAO.findAvaibleMatch(simpleDateFormat.parse(date), hour));
+            List<String> avaibleFootballFields = matchUtility.getAvaibleFootballFields(partitaDAO.findAvaibleMatch(simpleDateFormat.parse(date), hour));
+
+            for (String avaibleFootballField : avaibleFootballFields) {
+                arrayBuilder.add(avaibleFootballField);
+
+            }
+            objectBuilder.add("footballFields",arrayBuilder.build());
         } catch (ParseException e) {
             logger.error(e);
         }
-        return avaibleFootballFields;
+        return objectBuilder.build().toString();
     }
 
     private String startJoinMatchProces(String userNamePlayer,String processId) {

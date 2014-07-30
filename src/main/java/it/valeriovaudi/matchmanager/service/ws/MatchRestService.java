@@ -31,7 +31,7 @@ public interface MatchRestService {
     @GET
     @Path(value = "/getAllAviableFootballFields")
     @Produces("application/json")
-    List<String> getAllAviableFootballFields(@QueryParam("data") String date, @QueryParam("ora") String hour);
+    String getAllAviableFootballFields(@QueryParam("data") String date, @QueryParam("ora") String hour);
 
     @GET
     @Path(value = "/getAvaiableMatch")
