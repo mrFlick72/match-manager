@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="createMatch" name="create match process" isExecutable="true">
+    <serviceTask id="servicetask1" name="Ricerca campi disponibili" activiti:expression="${matchServiceImpl.findReservedFootBallField(hour, date)}" activiti:resultVariableName="footBallFields">
+      <extensionElements>
+        <activiti:field name="date">
+          <activiti:expression>${date}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="hour">
+          <activiti:expression>${hour}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="mailtask1" name="Mail di conferma prenotazione campo" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:string>valerio.vaudi@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>valerio.vaudi@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:expression>Ciao ${principal.nome}!&lt;br/&gt;
+
+Ti informiamo che la prenotazione del match del ${activitiDateFormat.format(match.partitaId.giorno)} alle ore ${match.partitaId.ora} nel campo ${match.partitaId.campoId} da te richiesta e' andata a buon fine&lt;br/&gt;
+
+Lo Stuff</activiti:expression>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string>Prenotazione Match avvenuta con successo</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow25" name="No" sourceRef="exclusivegateway3" targetRef="mailtask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${match == null}]]></conditionExpression>
+    </sequenceFlow>
+    <endEvent id="endevent3" name="End"></endEvent>
+    <sequenceFlow id="flow26" sourceRef="mailtask1" targetRef="endevent3"></sequenceFlow>
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <userTask id="searchUserTask" name="Ricerca disponibilità campi" activiti:assignee="${principal.userName}">
+      <extensionElements>
+        <activiti:formProperty id="date" name="Date" type="string" required="true"></activiti:formProperty>
+        <activiti:formProperty id="hour" name="Hour" type="string" required="true"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <userTask id="choiceTeamUsertask" name="Scelta della squadra sfidante" activiti:assignee="${principal.userName}">
+      <extensionElements>
+        <activiti:formProperty id="teamName" name="Team Name" type="string"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow58" sourceRef="choiceTeamUsertask" targetRef="servicetask8"></sequenceFlow>
+    <serviceTask id="servicetask8" name="Prenotazione del campo" activiti:expression="${matchServiceImpl.reservationMatch(teamName,date,footBallField,hour)}" activiti:resultVariableName="match">
+      <extensionElements>
+        <activiti:field name="teamName">
+          <activiti:expression>${teamName}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="footBallField">
+          <activiti:expression>${footBallField}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="date">
+          <activiti:expression>${date}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="hour">
+          <activiti:expression>${hour}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow60" sourceRef="servicetask8" targetRef="exclusivegateway3"></sequenceFlow>
+    <userTask id="newSearchUserTask" name="Search or choice" activiti:assignee="${principal.userName}">
+      <extensionElements>
+        <activiti:formProperty id="choiceOrSearch" name="Choice the next operation" type="enum" required="true">
+          <activiti:value id="choice" name="choice"></activiti:value>
+          <activiti:value id="search" name="search"></activiti:value>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway11" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow65" sourceRef="exclusivegateway11" targetRef="searchUserTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${choiceOrSearch == "search"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow66" sourceRef="exclusivegateway11" targetRef="footBallFieldChoiceUsertask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${choiceOrSearch == "choice"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow67" name="Si" sourceRef="exclusivegateway3" targetRef="mailtask1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${match != null}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="footBallFieldChoiceUsertask" name="Scelta del campo" activiti:assignee="${principal.userName}">
+      <extensionElements>
+        <activiti:formProperty id="footBallField" name="Football Field" type="string" required="true"></activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow68" sourceRef="footBallFieldChoiceUsertask" targetRef="choiceTeamUsertask"></sequenceFlow>
+    <sequenceFlow id="flow70" sourceRef="searchUserTask" targetRef="servicetask1"></sequenceFlow>
+    <sequenceFlow id="flow72" sourceRef="newSearchUserTask" targetRef="exclusivegateway11"></sequenceFlow>
+    <sequenceFlow id="flow73" sourceRef="servicetask1" targetRef="newSearchUserTask"></sequenceFlow>
+    <serviceTask id="servicetask9" name="Ricerca dei team disponibili" activiti:expression="${squadraDAOImpl.findByReferente(principal)}" activiti:resultVariableName="teams">
+      <extensionElements>
+        <activiti:field name="princpal">
+          <activiti:expression>${principal}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow74" sourceRef="startevent1" targetRef="servicetask9"></sequenceFlow>
+    <sequenceFlow id="flow75" sourceRef="servicetask9" targetRef="searchUserTask"></sequenceFlow>
+    <serviceTask id="mailtask2" name="Mail Task" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:string>valerio.vaudi@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>valerio.vaudi@localhost</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string>Registrazione Match fallita</activiti:string>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:expression>Ciao ${principal.nome}!
+Siamo siacenti,ma per porblemi tecnici la prenotazione della partita che hai richiesto e' fallita.
+Prego ritenti più tardi
+
+Lo Stuff</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <endEvent id="errorendevent1" name="ErrorEnd">
+      <errorEventDefinition errorRef="E0002"></errorEventDefinition>
+    </endEvent>
+    <sequenceFlow id="flow76" sourceRef="mailtask2" targetRef="errorendevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_createMatch">
+    <bpmndi:BPMNPlane bpmnElement="createMatch" id="BPMNPlane_createMatch">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="105.0" y="553.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="BPMNShape_servicetask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="477.0" y="250.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mailtask1" id="BPMNShape_mailtask1">
+        <omgdc:Bounds height="55.0" width="111.0" x="820.0" y="450.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="1069.0" y="257.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent3" id="BPMNShape_endevent3">
+        <omgdc:Bounds height="35.0" width="35.0" x="858.0" y="570.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask8" id="BPMNShape_servicetask8">
+        <omgdc:Bounds height="79.0" width="105.0" x="920.0" y="238.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway11" id="BPMNShape_exclusivegateway11">
+        <omgdc:Bounds height="40.0" width="40.0" x="509.0" y="589.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="footBallFieldChoiceUsertask" id="BPMNShape_footBallFieldChoiceUsertask">
+        <omgdc:Bounds height="55.0" width="105.0" x="615.0" y="326.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="choiceTeamUsertask" id="BPMNShape_choiceTeamUsertask">
+        <omgdc:Bounds height="55.0" width="105.0" x="734.0" y="250.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="searchUserTask" id="BPMNShape_searchUserTask">
+        <omgdc:Bounds height="55.0" width="123.0" x="245.0" y="250.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="newSearchUserTask" id="BPMNShape_newSearchUserTask">
+        <omgdc:Bounds height="55.0" width="105.0" x="477.0" y="409.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask9" id="BPMNShape_servicetask9">
+        <omgdc:Bounds height="55.0" width="105.0" x="70.0" y="250.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mailtask2" id="BPMNShape_mailtask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="810.0" y="80.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="errorendevent1" id="BPMNShape_errorendevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="630.0" y="90.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
+        <omgdi:waypoint x="1089.0" y="257.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1088.0" y="107.0"></omgdi:waypoint>
+        <omgdi:waypoint x="915.0" y="107.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="13.0" width="100.0" x="-81.0" y="-17.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="875.0" y="505.0"></omgdi:waypoint>
+        <omgdi:waypoint x="875.0" y="570.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow58" id="BPMNEdge_flow58">
+        <omgdi:waypoint x="839.0" y="277.0"></omgdi:waypoint>
+        <omgdi:waypoint x="920.0" y="277.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow60" id="BPMNEdge_flow60">
+        <omgdi:waypoint x="1025.0" y="277.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1069.0" y="277.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow65" id="BPMNEdge_flow65">
+        <omgdi:waypoint x="509.0" y="609.0"></omgdi:waypoint>
+        <omgdi:waypoint x="306.0" y="608.0"></omgdi:waypoint>
+        <omgdi:waypoint x="306.0" y="305.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow66" id="BPMNEdge_flow66">
+        <omgdi:waypoint x="549.0" y="609.0"></omgdi:waypoint>
+        <omgdi:waypoint x="667.0" y="608.0"></omgdi:waypoint>
+        <omgdi:waypoint x="667.0" y="381.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow67" id="BPMNEdge_flow67">
+        <omgdi:waypoint x="1089.0" y="297.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1088.0" y="476.0"></omgdi:waypoint>
+        <omgdi:waypoint x="931.0" y="477.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="13.0" width="100.0" x="-93.0" y="11.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow68" id="BPMNEdge_flow68">
+        <omgdi:waypoint x="667.0" y="326.0"></omgdi:waypoint>
+        <omgdi:waypoint x="667.0" y="277.0"></omgdi:waypoint>
+        <omgdi:waypoint x="734.0" y="277.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow70" id="BPMNEdge_flow70">
+        <omgdi:waypoint x="368.0" y="277.0"></omgdi:waypoint>
+        <omgdi:waypoint x="477.0" y="277.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow72" id="BPMNEdge_flow72">
+        <omgdi:waypoint x="529.0" y="464.0"></omgdi:waypoint>
+        <omgdi:waypoint x="529.0" y="589.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow73" id="BPMNEdge_flow73">
+        <omgdi:waypoint x="529.0" y="305.0"></omgdi:waypoint>
+        <omgdi:waypoint x="529.0" y="409.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow74" id="BPMNEdge_flow74">
+        <omgdi:waypoint x="122.0" y="553.0"></omgdi:waypoint>
+        <omgdi:waypoint x="122.0" y="305.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow75" id="BPMNEdge_flow75">
+        <omgdi:waypoint x="175.0" y="277.0"></omgdi:waypoint>
+        <omgdi:waypoint x="245.0" y="277.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow76" id="BPMNEdge_flow76">
+        <omgdi:waypoint x="810.0" y="107.0"></omgdi:waypoint>
+        <omgdi:waypoint x="665.0" y="107.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

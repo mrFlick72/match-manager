@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="matchControllerUtility"
+          class="it.valeriovaudi.matchmanager.support.MatchUtilityImpl"
+           p:activitiEngineService-ref="activitiEngineServiceImpl"
+           p:campi-ref="campi"/>
+
+
+    <bean id="abstractModelDTOFactory"
+          class="it.valeriovaudi.matchmanager.support.factory.AbstractModelDTOFactory"
+          abstract="true"
+          p:pattern="${dateFormat}"/>
+
+    <bean id="giocatoreFactory"
+          class="it.valeriovaudi.matchmanager.support.factory.GiocatoreFactory"
+          parent="abstractModelDTOFactory"/>
+
+    <bean id="squadraFactory"
+          class="it.valeriovaudi.matchmanager.support.factory.SquadraFactory"
+          p:giocatoreFactory-ref="giocatoreFactory"
+          parent="abstractModelDTOFactory"/>
+
+    <bean id="partitaFactory"
+          class="it.valeriovaudi.matchmanager.support.factory.PartitaFactory"
+          p:squadraFactory-ref="squadraFactory"
+          parent="abstractModelDTOFactory"/>
+
+    <bean id="jsonSingleResoltFactory"
+          class="it.valeriovaudi.matchmanager.support.factory.JsonSingleResoltFactory"
+          parent="abstractModelDTOFactory"/>
+
+</beans>

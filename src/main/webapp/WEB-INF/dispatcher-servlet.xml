@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder order="1" location="classpath:format.properties" ignore-unresolvable="true"/>
+
+    <mvc:annotation-driven/>
+
+    <mvc:resources mapping="/resources/**" location="classpath:/META-INF/web-resources/" />
+
+    <mvc:resources mapping="Style/**" location="classpath:css/"/>
+    <mvc:resources mapping="img/**" location="classpath:img/"/>
+    <mvc:resources mapping="js/**" location="classpath:js/"/>
+
+    <mvc:view-controller path="/index" view-name="/index" />
+
+    <!--<bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:viewClass="org.springframework.web.servlet.view.JstlView"
+          p:prefix="/WEB-INF/view/"
+          p:suffix=".jsp"
+          p:order="2"/>-->
+
+
+    <bean id="tilesviewResolver"
+          class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"
+          p:order="1"/>
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.web.HttpSessionRequiredException">
+					/logInError
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+    <bean id="dateConverter" class="it.valeriovaudi.matchmanager.support.DateConverter">
+        <property name="pattern" value="${dateFormat}"/>
+    </bean>
+
+    <bean id="converterToString" class="it.valeriovaudi.matchmanager.support.DateConverterToString">
+        <property name="pattern" value="${dateFormat}" />
+    </bean>
+
+
+    <bean id="mvcConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="dateConverter"/>
+                <ref bean="converterToString"/>
+            </set>
+        </property>
+
+    </bean>
+
+    <context:component-scan base-package="it.valeriovaudi.matchmanager.controller"/>
+    
+</beans>

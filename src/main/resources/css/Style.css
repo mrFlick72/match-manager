@@ -1,0 +1,134 @@
+h1.title,h2.title,h3.title,h4.title,h5.title,h6.title,h7.title
+{
+    text-align: center;
+}
+
+div.sfondo
+{
+    background-color: rgb(195, 255, 175);
+}
+
+div.header
+{
+    border: 1px solid black;
+}
+div.body
+{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+
+    min-height: 480px;
+}
+
+ div.footer
+{
+    border: 1px solid black;
+
+     border-bottom-right-radius: 30px;
+     border-bottom-left-radius:  30px;
+}
+
+.footerTable
+{
+    margin-right:33%;
+    margin-left:33%;
+}
+
+div
+{
+    padding-left: 5px;
+}
+
+div.logInBoxHeader
+{
+    background-color:#dcdcdc;
+    border: 1px solid black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+div.logInBoxBody
+{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+
+#ui-datepicker-div
+{
+    font-size: 62.5%;
+}
+
+
+div.Menu
+{
+    text-align:             center;
+    border-bottom:          1px solid;
+    border-left:            1px solid;
+    border-right:           1px solid;
+}
+
+div.Menu ul
+{
+    margin:                0px;
+    padding:               0px;
+}
+
+div.Menu li a
+{
+    text-decoration: none;
+    padding-left:    25px;
+    padding-right:   25px;
+    text-transform:  uppercase;
+    font-weight:     bolder;
+    color:           black;
+
+    border-radius:  30px;
+}
+
+div.Menu li a:hover,
+div.Menu li a:focus,
+div.Menu li a:active
+{
+    border-bottom: 3px solid steelblue;
+    color:         darkred;
+}
+
+div.Menu li
+{
+    display: inline;
+}
+
+table.teamBox {
+    border-width: 1px;
+    border-spacing: 2px;
+    border-style: solid;
+    border-color: #000000;
+    border-collapse: collapse;
+}
+
+table.teamBox td{
+    border-width: 1px;
+    border-spacing: 2px;
+    border-style: solid;
+    border-color: #000000;
+    border-collapse: collapse;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+table.teamBox td.empty{
+    border-width: 0px;
+    border-spacing: 0px;
+}
+
+tr.tableOdd
+{
+background-color : blue;
+opacity : 0.7;
+}
+
+tr.tableEven{
+    background-color : green;
+    opacity : 0.7;
+}
