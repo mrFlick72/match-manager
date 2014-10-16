@@ -35,4 +35,11 @@
           class="it.valeriovaudi.matchmanager.support.factory.JsonSingleResoltFactory"
           parent="abstractModelDTOFactory"/>
 
+    <beans profile="embedded">
+        <bean id="embeddedMailServerStarter"
+              class="it.valeriovaudi.matchmanager.support.EmbeddedMailServerStarter"/>
+        <import resource="classpath:batch/spring-batch-context.xml"/>
+    </beans>
 </beans>
+
+

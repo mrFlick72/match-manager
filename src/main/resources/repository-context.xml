@@ -3,18 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/tx
-                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                            http://www.springframework.org/schema/jdbc
+                            http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
-    <!--it.valeriovaudi.matchmanager.repository infrastructure configuration -->
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
-        </property>
-        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
-    </bean>
 
     <bean id="sharedEntityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean"
           p:entityManagerFactory-ref="entityManagerFactory"/>
@@ -26,4 +22,43 @@
 
     <tx:annotation-driven/>
 
+    <beans profile="embedded">
+        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+            </property>
+            <property name="dataSource" ref="dataSource"/>
+        </bean>
+
+        <jdbc:embedded-database id="dataSource" type="H2">
+            <jdbc:script location="classpath:db/partite_schema.sql" />
+
+            <jdbc:script location="classpath:org/springframework/batch/core/schema-h2.sql" />
+        </jdbc:embedded-database>
+    </beans>
+
+    <beans profile="default">
+        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+            </property>
+            <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+            <property name="packagesToScan" value="it.valeriovaudi.matchmanager.model"/>
+            <property name="jpaProperties">
+                <props>
+                    <prop key="hibernate.dialect">"org.hibernate.dialect.MySQL5Dialect"</prop>
+                    <prop key="hibernate.connection.driver_class">"com.mysql.jdbc.Driver"</prop>
+                    <prop key="hibernate.connection.url">"jdbc:mysql://localhost:3306/partite"</prop>
+                    <prop key="hibernate.connection.username">"root"</prop>
+                    <prop key="hibernate.connection.password"></prop>
+
+                    <prop key="hibernate.c3p0.min_size">"5"</prop>
+                    <prop key="hibernate.c3p0.max_size">"20"</prop>
+                    <prop key="hibernate.c3p0.timeout">"3002</prop>
+                    <prop key="hibernate.c3p0.max_statements">"50"</prop>
+                    <prop key="hibernate.c3p0.idle_test_period">"3000"</prop>
+                </props>
+            </property>
+        </bean>
+    </beans>
 </beans>

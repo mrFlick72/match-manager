@@ -6,10 +6,14 @@
            version="2.5">
 
     <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>${springProfile}</param-value>
+    </context-param>
+
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring-config.xml</param-value>
     </context-param>
-
     <!--
         <filter>
             <filter-name>springSecurityFilterChain</filter-name>

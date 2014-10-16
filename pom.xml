@@ -25,7 +25,10 @@
 
         <cxf.version>2.7.8</cxf.version>
 
+        <jdk.version>1.7</jdk.version>
         <jackson-2-version>2.0.2</jackson-2-version>
+        <spring.batch.version>3.0.1.RELEASE</spring.batch.version>
+        <tomcat.server.deploy>localhost:8080</tomcat.server.deploy>
     </properties>
 
     <dependencies>
@@ -49,6 +52,11 @@
             <version>${activiti-version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.181</version>
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
@@ -95,6 +103,12 @@
             <artifactId>spring-orm</artifactId>
         </dependency>
 
+        <!--Spring Batch Dependency-->
+        <dependency>
+            <groupId>org.springframework.batch</groupId>
+            <artifactId>spring-batch-core</artifactId>
+        </dependency>
+
         <!--Spring security dependency-->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -115,7 +129,6 @@
         </dependency>
 
         <!-- DB Dependencies -->
-
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
@@ -293,18 +306,6 @@
             <version>${jackson-2-version}</version>
         </dependency>
 
-
-
-
-        <!-- Test Dependencies -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-
         <dependency>
             <groupId>javax.json</groupId>
             <artifactId>javax.json-api</artifactId>
@@ -315,6 +316,21 @@
             <groupId>org.glassfish</groupId>
             <artifactId>javax.json</artifactId>
             <version>1.0.4</version>
+        </dependency>
+
+        <!--Mail Server Dempendency-->
+        <dependency>
+            <groupId>com.icegreen</groupId>
+            <artifactId>greenmail</artifactId>
+            <version>1.3</version>
+        </dependency>
+
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -413,6 +429,11 @@
                 <artifactId>spring-data-jpa</artifactId>
                 <version>${spring.data.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.batch</groupId>
+                <artifactId>spring-batch-core</artifactId>
+                <version>${spring.batch.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
@@ -444,54 +465,76 @@
         </repository>
     </repositories>
 
+    <profiles>
+        <profile>
+            <id>default</id>
+            <properties>
+                <springProfile>default</springProfile>
+                <db>mysql</db>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>embedded</id>
+            <properties>
+                <springProfile>embedded</springProfile>
+                <db>h2</db>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <finalName>Match-Manager</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
 
             <!-- Facilitates downloading source and javadoc in Eclipse -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
+                <artifactId>maven-resources-plugin</artifactId>
                 <version>2.3</version>
+                <configuration>
+                    <!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/webapp</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
             <!-- Plugin to run and test through maven -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-
-                <version>2.1</version>
+                <version>2.2</version>
                 <configuration>
-                    <goal>test</goal>
+                    <path>/Match-Manager</path>
+                    <url>http://${tomcat.server.deploy}/manager/text</url>
+                    <server>mytomcat</server>
                 </configuration>
-                <!-- For any extra dependencies needed when running embedded Tomcat (not WAR dependencies) add them below -->
-                <executions>
-
-                    <execution>
-                        <id>start-tomcat</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>run</goal>
-                            <goal>run-war-only</goal>
-                        </goals>
-               <!--
-                        <configuration>
-                            <fork>true</fork>
-                        </configuration>
-               -->
-                    </execution>
-
-                    <execution>
-                        <id>stop-tomcat</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>shutdown</goal>
-                        </goals>
-                    </execution>
-
-                </executions>
             </plugin>
-
         </plugins>
     </build>
 </project>

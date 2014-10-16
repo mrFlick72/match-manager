@@ -4,6 +4,7 @@ import it.valeriovaudi.matchmanager.repository.dao.Interface.GiocatoreDAO;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -19,6 +20,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ContextConfiguration(locations = {"classpath:spring-config.xml", "file:src/main/webapp/WEB-INF/dispatcher-servlet.xml"})
 @WebAppConfiguration
 @RunWith(value = SpringJUnit4ClassRunner.class)
+@ActiveProfiles("embedded")
 public class MvcAbstractTests {
 
     protected MockMvc mockMvc;

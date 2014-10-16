@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-
-
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-        <property name="driverClass" value="${jdbc.driver}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
-    </bean>
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/jdbc
+                           http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <bean id="activitiTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="activitiEngineDataSource" />
     </bean>
 
     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
-
         <property name="databaseType" value="${db}" />
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="activitiEngineDataSource" />
         <property name="transactionManager" ref="activitiTransactionManager" />
         <property name="databaseSchemaUpdate" value="true" />
         <property name="deploymentResources" value="classpath:/bpm/*.bpmn20.xml"/>
@@ -32,7 +25,6 @@
         <property name="mailServerHost" value="localhost"/>
         <property name="mailServerPort" value="25"/>
         <property name="mailServerUseTLS" value="true"/>
-
     </bean>
 
     <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
@@ -47,4 +39,22 @@
     <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService" />
     <bean id="itentitiService" factory-bean="processEngine" factory-method="getIdentityService" />
 
+    <beans profile="embedded">
+        <jdbc:embedded-database id="activitiEngineDataSource" type="H2">
+            <jdbc:script location="classpath:org/activiti/db/create/activiti.h2.create.engine.sql" />
+            <jdbc:script location="classpath:org/activiti/db/create/activiti.h2.create.history.sql" />
+            <jdbc:script location="classpath:org/activiti/db/create/activiti.h2.create.identity.sql" />
+        </jdbc:embedded-database>
+    </beans>
+
+    <beans profile="default">
+        <bean id="activitiEngineDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+            <property name="driverClass" value="${jdbc.driver}" />
+            <property name="url" value="${jdbc.url}" />
+            <property name="username" value="${jdbc.username}" />
+            <property name="password" value="${jdbc.password}" />
+        </bean>
+    </beans>
+
 </beans>
+

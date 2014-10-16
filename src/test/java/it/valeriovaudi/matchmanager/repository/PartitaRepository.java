@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -25,6 +26,7 @@ import java.util.Date;
 
 @ContextConfiguration(locations = {"classpath:spring-config.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
+@ActiveProfiles("embedded")
 public class PartitaRepository {
 
     @Autowired
