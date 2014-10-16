@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/batch
+                           http://www.springframework.org/schema/batch/spring-batch.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <batch:job-repository data-source="dataSource" transaction-manager="dataSourceTransactionManager"/>
+
+
+    <bean id="dataSourceTransactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+
+    <batch:job id="init">
+        <batch:step id="userInit" next="squadraInit">
+            <batch:tasklet>
+                <batch:chunk reader="userReader"
+                             writer="giocatoreItemWriter"
+                             commit-interval="10"/>
+            </batch:tasklet>
+        </batch:step>
+
+
+        <batch:step id="squadraInit">
+            <batch:tasklet>
+                <batch:chunk reader="squadraReader"
+                             writer="jpaItemWriter"
+                             commit-interval="10"/>
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+
+
+    <bean id="userReader"
+          class="org.springframework.batch.item.file.FlatFileItemReader"
+          p:resource="classpath:batch/GIOCATORE.csv">
+        <property name="lineMapper">
+            <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+                <property  name="lineTokenizer">
+                    <bean  class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"
+                           p:delimiter=","
+                           p:names="nome, cognome, codiceFiscale, userName, mail, password"/>
+                </property>
+                <property name="fieldSetMapper">
+                    <bean class="it.valeriovaudi.matchmanager.batch.fieldsetmapper.GiocatoreFieldSetMapper"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="squadraReader"
+          class="org.springframework.batch.item.file.FlatFileItemReader"
+          p:resource="classpath:batch/FORMAZIONE.csv">
+        <property name="lineMapper">
+            <bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+                <property  name="lineTokenizer">
+                    <bean  class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"
+                           p:delimiter=","/>
+                </property>
+                <property name="fieldSetMapper">
+                    <bean class="it.valeriovaudi.matchmanager.batch.fieldsetmapper.SquadraFieldSetMapper"
+                            p:giocatoreDAO-ref="giocatoreDAOImpl"/>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="jpaItemWriter"
+          class="org.springframework.batch.item.database.JpaItemWriter"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
+
+    <bean id="giocatoreItemWriter"
+          class="it.valeriovaudi.matchmanager.batch.itemwriter.GiocatoreItemWriter"
+            p:userService-ref="userServiceImpl"/>
+
+
+    <bean id="initBatchStarter"
+          depends-on="activitiEngineServiceImpl"
+          class="it.valeriovaudi.matchmanager.batch.InitBatchStarter"/>
+
+    <bean id="simpleJobLauncher"
+          class="org.springframework.batch.core.launch.support.SimpleJobLauncher"
+          p:jobRepository-ref="jobRepository"/>
+
+</beans>
