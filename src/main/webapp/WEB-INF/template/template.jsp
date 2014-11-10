@@ -18,7 +18,7 @@
     <tiles:insertAttribute name="menu" />
 
     <!--search div-->
-    <div class="container_12 sfondo body">
+    <div class="container-fluid sfondo body">
 
         <tiles:insertAttribute name="content" />
 

@@ -1,6 +1,6 @@
-<div class="container_12 footer sfondo">
+<div class="container-fluid footer sfondo">
     <!--footer div-->
-    <div class="grid_12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
         <table class="footerTable">
             <tr>

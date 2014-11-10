@@ -1,6 +1,6 @@
     <!--body div-->
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <p>
                 For this home page i have decided of integrate the principal diagram of the documentation.  <br/>
                 UML, BPMN 2.0 and ER diagram are exposed here,  but before we specify that the SW does.     <br/>

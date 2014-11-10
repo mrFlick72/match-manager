@@ -7,15 +7,14 @@
 <link rel="stylesheet" href="js/dataTable/css/jquery.dataTables.css" type="text/css"/>
 <link rel="stylesheet" href="js/dataTable/css/jquery.dataTables_themeroller.css" type="text/css"/>
 
-<link rel="stylesheet" href="Style/960GS.css" type="text/css"/>
-<link rel="stylesheet" href="Style/Style.css" type="text/css"/>
+<link rel="stylesheet" href="css/Style.css" type="text/css"/>
 
-<link rel="stylesheet" href="js/bootstrap-3.1.1-dist/css/bootstrap.css" type="text/css"/>
-<link rel="stylesheet" href="js/bootstrap-3.1.1-dist/js/bootstrap.min.js" type="text/css"/>
+<%--<link rel="stylesheet" href="js/css.bootstrap-3.1.1-dist/css/css.bootstrap-theme.css" type="text/css"/>--%>
 
-<%--<link rel="stylesheet" href="js/bootstrap-3.1.1-dist/css/bootstrap-theme.css" type="text/css"/>--%>
+<script src="js/jquery-2.1.1.js"></script>
 
-<script src="js/jquery-ui-1.10.0/jquery-1.9.0.js"></script>
+<link rel="stylesheet" href="css/bootstrap/css/bootstrap.css" type="text/css"/>
+<script src="css/bootstrap/js/bootstrap.js"></script>
 
 <script src="js/jquery-ui-1.10.0/ui/jquery-ui.js"></script>
 
