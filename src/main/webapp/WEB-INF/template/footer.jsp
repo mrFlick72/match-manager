@@ -1,25 +1,26 @@
+<!--footer div-->
 <div class="container-fluid footer sfondo">
-    <!--footer div-->
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+   <div class="row">
+       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
 
-        <table class="footerTable">
-            <tr>
-                <td colspan="2">Tesina for Seminars in SW and Service</td>
-            </tr>
-            <tr>
-                <td>First Name:</td>
-                <td>Valerio</td>
-            </tr>
-            <tr>
-                <td>Last Name:</td>
-                <td>Vaudi</td>
-            </tr>
-            <tr>
-                <td>Matricola number:</td>
-                <td>1034003</td>
-            </tr>
-        </table>
+       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+           <div class="row">
+               <span>Tesina for Seminars in SW and Service</span>
+           </div>
 
+           <div class="row">
+               <span>First Name: Valerio</span>
+           </div>
+
+           <div class="row">
+               <span>Last Name: Vaudi</span>
+           </div>
+
+           <div class="row">
+               <span>Matricola number: 1034003</span>
+           </div>
+       </div>
+
+       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
     </div>
-    <div class="clear"></div>
 </div>

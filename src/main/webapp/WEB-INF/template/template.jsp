@@ -4,30 +4,24 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html>
-<head>
-    <tiles:insertAttribute name="head" />
-</head>
+    <html>
+    <head>
+        <tiles:insertAttribute name="head" />
+    </head>
 
-<body>
+    <body>
+        <%--div di header--%>
+        <tiles:insertAttribute name="header" />
 
-    <%--div di header--%>
-    <tiles:insertAttribute name="header" />
+        <%--di per il menu--%>
+        <tiles:insertAttribute name="menu" />
 
-    <%--di per il menu--%>
-    <tiles:insertAttribute name="menu" />
+        <!--search div-->
+        <div class="container-fluid sfondo body">
+            <tiles:insertAttribute name="content" />
+        </div>
 
-    <!--search div-->
-    <div class="container-fluid sfondo body">
-
-        <tiles:insertAttribute name="content" />
-
-    </div>
-    <%--footer div --%>
-    <tiles:insertAttribute name="footer" />
-
-<div>
-
-</div>
-</body>
+        <%--footer div --%>
+        <tiles:insertAttribute name="footer" />
+    </body>
 </html>
