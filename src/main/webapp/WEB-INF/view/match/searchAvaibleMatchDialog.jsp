@@ -14,13 +14,6 @@
             });
 
         } );
-
-        $(function() {
-            $( "#datepicker" ).datepicker();
-            $( "#datepicker" ).datepicker( "option", "dateFormat",'dd/mm/yy');
-
-        });
-
     </script>
 
     <div id="searchAvaibleMatch" title="Search vaible match dialog form!">

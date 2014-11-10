@@ -7,11 +7,6 @@
    	var footballField;
    	
         $(function(){
-            $('#teamBox').dataTable();
-            
-            $( "#datepicker" ).datepicker();
-            $( "#datepicker" ).datepicker( "option", "dateFormat",'dd/mm/yy');
-
             var registerMatchTable = $( "#registerMatchTable > tbody > tr");
             
            	registerMatchTable.filter(":even").addClass("tableEven");
@@ -34,7 +29,7 @@
         <h1> Choice a day </h1>
 
         <form name="searchAvaibleMatch" method="post" action="searchAvaibleMatch">
-            <input name="date" type="text" id="datepicker"/>
+            <input name="date" type="text" class="datePickerMarker"/>
 
             <select name="selectedHour">
                 <option> ---------- </option>
@@ -76,7 +71,7 @@
             </c:if>
                
 
-                <table id="teamBox"  class="teamBox">
+                <table class="datePickerMarker teamBox">
                     <thead>
                     <tr>
                         <td>Team name</td>

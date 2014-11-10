@@ -16,12 +16,6 @@
 
                 } );
 
-                $(function() {
-                    $( "#datepicker" ).datepicker();
-                    $( "#datepicker" ).datepicker( "option", "dateFormat",'dd/mm/yy');
-
-                });
-
                 $(document).ready(function() {
                     $('#teamCompleteDialog').dialog({autoOpen:false,
                         resizable:false,

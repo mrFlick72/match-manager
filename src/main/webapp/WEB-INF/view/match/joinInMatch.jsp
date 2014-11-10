@@ -4,16 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div>
-
-    <script>
-        $(function() {
-            $( "#datepicker" ).datepicker();
-            $( "#datepicker" ).datepicker( "option", "dateFormat",'dd/mm/yy');
-
-        });
-    </script>
-
-
     <div id="search" class="grid_12">
         <form name="searchMatch" action="searchMatch" method="post">
             <table>

@@ -7,6 +7,12 @@
     <html>
     <head>
         <tiles:insertAttribute name="head" />
+        <script>
+           $(function(){
+               initDatePicker();
+               initDataTable();
+            });
+        </script>
     </head>
 
     <body>

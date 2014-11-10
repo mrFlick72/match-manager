@@ -16,7 +16,6 @@
                     <c:choose>
                         <c:when test="${referente == null}">
                             <form action="logIn" method="post" class="form-horizontal">
-
                                     <div class="row">
                                         <div class="form-group">
                                             <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">User Name:</span>
