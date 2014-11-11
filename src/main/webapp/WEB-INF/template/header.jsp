@@ -10,7 +10,7 @@
 
         <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
             <div class="panel panel-default sfondo">
-                <div class="panel-heading"><img src="img/ball.jpg"/> Login's Panel</div>
+                <div class="panel-heading"><div class="label"><img src="img/ball.jpg"/></div>Login's Panel</div>
 
                 <div class="panel-body">
                     <c:choose>
@@ -20,7 +20,7 @@
                                         <div class="form-group">
                                             <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">User Name:</span>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                <input name="userNameIn" type="text" size="6" value="admin"/>
+                                                <input name="userNameIn" type="text" placeholder="admin" class="form-control"/>
                                             </div>
                                         </div>
                                     </div>
@@ -29,7 +29,7 @@
                                         <div class="form-group">
                                             <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Password:</span>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                <input name="passwordIn" type="password" size="6"  value="admin"/>
+                                                <input name="passwordIn" type="password" placeholder="admin" class="form-control"/>
                                             </div>
                                         </div>
                                     </div>
@@ -57,13 +57,8 @@
                                     Hello! ${referente.nome}
                                     <br/>
                                     Welcome back
+                                    <hr/>
                                 </span>
-
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <hr/>
-                                    </div>
-                                </div>
 
                                 <div class="row">
                                     <fieldset>
@@ -71,35 +66,29 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">First Name:</span>
-                                                <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                        ${referente.nome}
-                                                </span>
+                                                <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">${referente.nome}</span>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="form-group">
                                                 <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Last Name:</span>
-                                                <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                        ${referente.cognome}
-                                                </span>
+                                                <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">${referente.cognome}</span>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="form-group">
                                                 <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">User Name:</span>
-                                                <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                        ${referente.userName}
-                                                </span>
+                                                <span class="col-lg-8 col-md-8 col-sm-8 col-xs-8">${referente.userName}</span>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="form-group">
-                                                <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <td><button class="btn btn-default" type="submit">log-out</button></td>
-                                                </span>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                    <button class="btn btn-default" type="submit">log-out</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </fieldset>

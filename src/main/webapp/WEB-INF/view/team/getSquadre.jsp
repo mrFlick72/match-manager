@@ -7,41 +7,30 @@
                     <h3 class="panel-title"><img src="img/ball.jpg"/> ${squadra.nome}</h3>
                 </div>
                 <div class="panel-body">
-                    <table class = "teamBox">
+                    <h1>Leader:</h1>
+                    <table class = "table">
                         <thead>
-                        <tr> <td colspan="4">Referente:</td> </tr>
-                        <tr> <td colspan="4"><hr/></td> </tr>
-                        <tr>
-                            <td class="empty"> </td>
-                            <td>First Name</td>
-                            <td>Last Name</td>
-                            <td>Mail</td>
-                        </tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Mail</th>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td class="empty"></td>
-                            <td>${squadra.referente.nome}</td>
-                            <td>{squadra.referente.cognome}</td>
-                            <td>${squadra.referente.mail}</td>
-                        </tr>
-
-                        <tr> <td colspan="4">Team</td> </tr>
-                        <tr> <td colspan="4"><hr/></td> </tr>
-                        <c:forEach items="${squadra.giocatori}" var="giocatoreAux">
                             <tr>
-                                <td class="empty"> </td>
-                                <td>${giocatoreAux.nome}</td>
-                                <td>${giocatoreAux.cognome}</td>
-                                <td> </td>
+                                <td>${squadra.referente.nome}</td>
+                                <td>${squadra.referente.cognome}</td>
+                                <td>${squadra.referente.mail}</td>
                             </tr>
-                        </c:forEach>
+
+                            <tr><td colspan="3"><h1>Team:</h1></td></tr>
+
+                            <c:forEach items="${squadra.giocatori}" var="giocatoreAux">
+                                <tr>
+                                    <td>${giocatoreAux.nome}</td>
+                                    <td>${giocatoreAux.cognome}</td>
+                                    <td/>
+                                </tr>
+                            </c:forEach>
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <td colspan="4"> <hr/> </td>
-                        </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>
