@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <c:forEach items="${squadre}" var="squadra">
-        <div class="col-lg-6">
+        <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><img src="img/ball.jpg"/> ${squadra.nome}</h3>

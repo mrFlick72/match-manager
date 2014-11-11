@@ -23,8 +23,8 @@
            
         })
     </script>
-
-    <div class="grid_12">
+<div class="row">
+    <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
         <h1> Choice a day </h1>
 
@@ -42,41 +42,39 @@
             <button type="submit">Search</button>
         </form>
     </div>
-    <div class="clear"></div>
-        <div class="grid_6 ">
-            <form name="registerMatch">
-            <c:if test="${avaibleFootBallFields != null}">
-                <table id="registerMatchTable">
-                    <thead>
-                    <tr>
-                        <td>Date</td>
-                        <td>Hour</td>
-                        <td>FootBall Field</td>
-                        <td>Choice</td>
-                    </tr>
-                    </thead>
+</div>
 
-                    <tbody>
+<div class="row">
+    <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <form name="registerMatch">
+                <c:if test="${avaibleFootBallFields != null}">
+                    <table id="registerMatchTable">
+                        <thead>
+                        <th>Date</th>
+                        <th>Hour</th>
+                        <th>FootBall Field</th>
+                        <th>Choice</th>
+                        </thead>
+
+                        <tbody>
                         <c:forEach items="${avaibleFootBallFields}" var = "avaibleFootBallField">
                             <tr>
-                            <td>${dateRequest}</td>
-                            <td>${hourRequest}</td>
-                            <td>${avaibleFootBallField}</td>
-                            <td><input type="checkbox"/></td>
+                                <td>${dateRequest}</td>
+                                <td>${hourRequest}</td>
+                                <td>${avaibleFootBallField}</td>
+                                <td><input type="checkbox"/></td>
                             </tr>
                         </c:forEach>
-                    </tbody>
+                        </tbody>
 
-                </table>
-            </c:if>
-               
+                    </table>
+                </c:if>
 
-                <table class="datePickerMarker teamBox">
+
+                <table class="table">
                     <thead>
-                    <tr>
-                        <td>Team name</td>
-                        <td>Select</td>
-                    </tr>
+                    <th>Team name</th>
+                    <th>Select</th>
                     </thead>
                     <tbody>
                     <c:forEach items="${squadreByReferente}" var="squadra">
@@ -88,7 +86,5 @@
                     </tbody>
                 </table>
             </form>
-        </div>
-
-        <div class="grid_6 "></div>
-        <div class="clear"></div>
+    </div>
+</div>

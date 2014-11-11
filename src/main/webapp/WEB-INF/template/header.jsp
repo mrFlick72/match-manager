@@ -16,16 +16,16 @@
                     <c:choose>
                         <c:when test="${referente == null}">
                             <form action="logIn" method="post" class="form-horizontal">
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">User Name:</span>
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                <input name="userNameIn" type="text" placeholder="admin" class="form-control"/>
-                                            </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">User Name:</span>
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                            <input name="userNameIn" type="text" placeholder="admin" class="form-control"/>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="row">
+                                <div class="row">
                                         <div class="form-group">
                                             <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Password:</span>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -53,12 +53,14 @@
                         </c:when>
                         <c:otherwise>
                             <form action="logOut" method="post" class="form-horizontal">
-                                <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    Hello! ${referente.nome}
-                                    <br/>
-                                    Welcome back
-                                    <hr/>
-                                </span>
+                                <div class="row">
+                                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        Hello! ${referente.nome}
+                                        <br/>
+                                        Welcome back
+                                        <hr/>
+                                    </span>
+                                </div>
 
                                 <div class="row">
                                     <fieldset>

@@ -21,7 +21,7 @@
         <h1> Choice a day </h1>
 
         <form name="searchAvaibleMatch" method="post" action="searchAvaibleMatch">
-            <input name="date" type="text" id="datepicker"/>
+            <input name="date" type="text" class="datePickerMarker"/>
 
                 <select name="selectedHour">
                     <option> ---------- </option>
