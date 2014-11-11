@@ -7,7 +7,6 @@
             <div style="width: 40%">
                 <div class="logInBoxHeader">
                     <img src="img/ball.jpg"/> ${squadra.nome}
-
                 </div>
                 <div class="logInBoxBody">
 

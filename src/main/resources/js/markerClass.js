@@ -1,5 +1,5 @@
 function initDataTable(){
-    $("table.datePickerMarker").dataTable();
+    $("table.dataTableMarker").dataTable();
 }
 
 function initDatePicker(){

@@ -1,115 +1,110 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ui-util" tagdir="/WEB-INF/tags/ui-utils" %>
 
-    <div>
-        <!--body div-->
+<div class="sfondo">
+    <!--body div-->
+        <script>
+/*            $(document).ready(function() {
+                var searchAvaibleMatch = $('#searchAvaibleMatch');
+                var searchAvaibleMatchForm = searchAvaibleMatch.children('form').filter('form');
 
-            <script>
+                searchAvaibleMatch.dialog({
+                    resizable:false,
+                    buttons: {"OK": function() {searchAvaibleMatchForm.submit(); $( this ).dialog( "close" );}}
+                });
 
-                $(document).ready(function() {
-                    var searchAvaibleMatch = $('#searchAvaibleMatch');
-                    var searchAvaibleMatchForm = searchAvaibleMatch.children('form').filter('form');
+            } );*/
 
-                    searchAvaibleMatch.dialog({
-                        resizable:false,
-                        buttons: {"OK": function() {searchAvaibleMatchForm.submit(); $( this ).dialog( "close" );}}
-                    });
+            $(document).ready(function() {
+                $('#teamCompleteDialog').dialog({autoOpen:false,
+                    resizable:false,
+                    buttons: {"OK": function() {$( this ).dialog( "close" );}}
+                });
 
-                } );
+                var length = $('#giocatoriInSquadraTable>tbody').children().length;
 
-                $(document).ready(function() {
-                    $('#teamCompleteDialog').dialog({autoOpen:false,
-                        resizable:false,
-                        buttons: {"OK": function() {$( this ).dialog( "close" );}}
-                    });
+                if(length >= 5)
+                    $('#teamCompleteDialog').dialog("open");
 
-                    $('#giocatoriDisponibiliTable').dataTable();
+            });
+        </script>
 
-                    $('#giocatoriInSquadraTable').dataTable();
+        <div id="teamCompleteDialog" title="Information!">
+            the team is complete.
+        </div>
 
-                    var length = $('#giocatoriInSquadraTable>tbody').children().length;
+        <form name="giocatoreInsert" action="teamRegister" method="post">
+            <div class="row">
+                <div class="form-group">
+                    <span class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        Team Name:
+                    </span>
+                    <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <input name="teamNameIn" type="text">
+                    </div>
+                </div>
+            </div>
 
-                    if(length >= 5)
-                        $('#teamCompleteDialog').dialog("open");
+            <ui-util:separator columnNumber="12"/>
 
-                } );
-
-            </script>
-
-                <div id="teamCompleteDialog" title="Information!">
-                    the team is complete.
+            <div class="row">
+                <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Giocatori disponibili</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="dataTableMarker">
+                                <thead>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>Last Name</td>
+                                    <td>Join to team</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${giocatoriDisponibili}" var="giocatore">
+                                    <tr onclick="InSquadra('${giocatore.codiceFiscale}')">
+                                        <td>${giocatore.nome}</td>
+                                        <td>${giocatore.cognome}</td>
+                                        <td style="text-align: center"> <button type="submit"> <img src="img/si.jpg"/>  </button> </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
 
-                <form name="giocatoreInsert" action="teamRegister" method="post">
-                    <div class="grid_12 sfondo">
-
-                        <table>
-                            <tr>
-                                <td>Team Name:</td>
-                                <td><input name="teamNameIn" size="15" type="text"></td>
-                            </tr>
-                        </table>
-                     </div>
-                    <div class="clear"></div>
-
-                    <div class="grid_12 alpha omega">
-                        <hr/>
-                    </div>
-                    <div class="clear"></div>
-
-                    <div class="grid_6 alpha sfondo">
-                        <h1 class="title">Giocatori disponibili</h1>
-                        <hr/>
-                        <table id="giocatoriDisponibiliTable">
-                            <thead>
-                            <tr>
-                                <td>First Name</td>
-                                <td>Last Name</td>
-                                <td>Join to team</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${giocatoriDisponibili}" var="giocatore">
-                                <tr onclick="InSquadra('${giocatore.codiceFiscale}')">
-                                    <td>${giocatore.nome}</td>
-                                    <td>${giocatore.cognome}</td>
-                                    <td style="text-align: center"> <button type="submit"> <img src="img/si.jpg"/>  </button> </td>
+                <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Giocatori in squadra</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table id="giocatoriInSquadraTable" class="dataTableMarker">
+                                <thead>
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>Last Name</td>
+                                    <td>Leaves the team</td>
                                 </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${giocatoriInSquadra}" var="giocatore">
+                                    <tr onclick="FuoriSquadra('${giocatore.codiceFiscale}')">
+                                        <td>${giocatore.nome}</td>
+                                        <td>${giocatore.cognome}</td>
+                                        <td style="text-align: center"> <button type="submit"> <img src="img/no.jpg"/> </button> </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="grid_6 omega sfondo">
-                        <h1 class="title">Giocatori in squadra</h1>
-                        <hr/>
-                        <table id="giocatoriInSquadraTable">
-                            <thead>
-                            <tr>
-                                <td>First Name</td>
-                                <td>Last Name</td>
-                                <td>Leaves the team</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${giocatoriInSquadra}" var="giocatore">
-                                <tr onclick="FuoriSquadra('${giocatore.codiceFiscale}')">
-                                    <td>${giocatore.nome}</td>
-                                    <td>${giocatore.cognome}</td>
-                                    <td style="text-align: center"> <button type="submit"> <img src="img/no.jpg"/> </button> </td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                    <div class="clear"></div>
-
-                    <div class="grid_12">
-                        <hr/>
-                        <input type="submit" value="submit">
-                    </div>
-                </form>
-                    <div class="clear"></div>
-
-        </div>
+            <ui-util:separator columnNumber="12"/>
+        </form>
+    </div>

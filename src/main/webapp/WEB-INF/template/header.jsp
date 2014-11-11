@@ -3,12 +3,12 @@
     <div class="row">
 
         <!--header div-->
-        <div class = "col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <div class = "col-lg-9 col-md-9 col-sm-9 col-xs-9">
             <h1 class="title"> Match Manager </h1>
             <h2 class="title"> the software that help you for create new match of football </h2>
         </div>
 
-        <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">
+        <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-3">
             <div class="panel panel-default sfondo">
                 <div class="panel-heading"><img src="img/ball.jpg"/> Login's Panel</div>
 
