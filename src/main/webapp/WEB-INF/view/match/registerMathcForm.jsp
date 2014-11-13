@@ -2,10 +2,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
     <script>
-	var date;
-   	var hour;
-   	var footballField;
-   	
         $(function(){
             var registerMatchTable = $( "#registerMatchTable > tbody > tr");
             
@@ -35,11 +31,8 @@
 
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <select class="form-control" name="selectedHour">
-                        <option> ---------- </option>
                         <c:forEach items="${hours}" var = "hour">
-                            <option>
-                                    ${hour}
-                            </option>
+                            <option>${hour}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -56,14 +49,13 @@
     <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <form name="registerMatch">
                 <c:if test="${avaibleFootBallFields != null}">
-                    <table class="table" id="registerMatchTable">
+                    <table class="table table-hover" id="registerMatchTable">
                         <thead>
                             <th>Date</th>
                             <th>Hour</th>
                             <th>FootBall Field</th>
                             <th>Choice</th>
                         </thead>
-
                         <tbody>
                         <c:forEach items="${avaibleFootBallFields}" var = "avaibleFootBallField">
                             <tr>
@@ -74,10 +66,8 @@
                             </tr>
                         </c:forEach>
                         </tbody>
-
                     </table>
                 </c:if>
-
 
                 <table class="table">
                     <thead>
