@@ -11,8 +11,7 @@
             
            	registerMatchTable.filter(":even").addClass("tableEven");
            	registerMatchTable.filter(":odd").addClass("tableOdd");
-           	
-       
+
            	
            	registerMatchTable.click(function(){
                		registerMatchTable.not(this)
@@ -29,18 +28,27 @@
         <h1> Choice a day </h1>
 
         <form name="searchAvaibleMatch" method="post" action="searchAvaibleMatch">
-            <input name="date" type="text" class="datePickerMarker"/>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <input name="date" type="text" class="form-control datePickerMarker"/>
+                </div>
 
-            <select name="selectedHour">
-                <option> ---------- </option>
-                <c:forEach items="${hours}" var = "hour">
-                    <option>
-                            ${hour}
-                    </option>
-                </c:forEach>
-            </select>
-            <button type="submit">Search</button>
-        </form>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <select class="form-control" name="selectedHour">
+                        <option> ---------- </option>
+                        <c:forEach items="${hours}" var = "hour">
+                            <option>
+                                    ${hour}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <button class="btn btn-default" type="submit">Search</button>
+                </div>
+            </div>
+            </form>
     </div>
 </div>
 
@@ -48,12 +56,12 @@
     <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <form name="registerMatch">
                 <c:if test="${avaibleFootBallFields != null}">
-                    <table id="registerMatchTable">
+                    <table class="table" id="registerMatchTable">
                         <thead>
-                        <th>Date</th>
-                        <th>Hour</th>
-                        <th>FootBall Field</th>
-                        <th>Choice</th>
+                            <th>Date</th>
+                            <th>Hour</th>
+                            <th>FootBall Field</th>
+                            <th>Choice</th>
                         </thead>
 
                         <tbody>
@@ -73,8 +81,8 @@
 
                 <table class="table">
                     <thead>
-                    <th>Team name</th>
-                    <th>Select</th>
+                        <th>Team name</th>
+                        <th>Select</th>
                     </thead>
                     <tbody>
                     <c:forEach items="${squadreByReferente}" var="squadra">

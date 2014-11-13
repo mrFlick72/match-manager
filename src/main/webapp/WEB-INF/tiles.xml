@@ -9,12 +9,10 @@
         <put-attribute name="footer" value="/WEB-INF/template/footer.jsp" />
     </definition>
 
-
     <!--index-->
     <definition name="/index" extends="page">
         <put-attribute name="content" value="/WEB-INF/view/index/index.jsp"/>
     </definition>
-
 
     <!--login and register-->
     <definition name="/logInError" extends="page">
@@ -24,7 +22,6 @@
     <definition name="registerForm" extends="page">
         <put-attribute name="content" value="/WEB-INF/view/logIn/registerForm.jsp"/>
     </definition>
-
 
     <!--match-->
     <definition name="registerMathcForm" extends="page">
@@ -43,6 +40,5 @@
     <definition name="registerSquadraForm" extends="page">
         <put-attribute name="content" value="/WEB-INF/view/team/registerSquadraForm.jsp"/>
     </definition>
-
 
 </tiles-definitions>
