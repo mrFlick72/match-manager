@@ -11,8 +11,8 @@
                 <div class="row">
                     <div class="form-group">
                         <span class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">Date:</span>
-                        <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <input name="date" type="text" class="datePickerMarker" />
+                        <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <input name="date" type="text" class="form-control datePickerMarker" />
                         </div>
                     </div>
                 </div>
@@ -20,9 +20,8 @@
                 <div class="row">
                     <div class="form-group">
                         <span class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">Campo:</span>
-                        <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <select name="footballField">
-                                <option> ------------------ </option>
+                        <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <select class="form-control" name="footballField">
                                 <c:forEach items="${campi}" var="campo" >
                                     <option> ${campo} </option>
                                 </c:forEach>
@@ -34,9 +33,8 @@
                 <div class="row">
                     <div class="form-group">
                         <span class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Hour:</span>
-                        <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <select name="hour">
-                                <option> ------------------ </option>
+                        <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <select class="form-control" name="hour">
                                 <c:forEach items="${hours}" var="hour" >
                                     <option> ${hour} </option>
                                 </c:forEach>

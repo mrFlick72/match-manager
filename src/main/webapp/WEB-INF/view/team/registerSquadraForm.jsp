@@ -41,7 +41,7 @@
                         Team Name:
                     </span>
                         <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                            <input name="teamNameIn" type="text">
+                            <input  class="form-control" name="teamNameIn" type="text">
                         </div>
                     </div>
                 </div>
