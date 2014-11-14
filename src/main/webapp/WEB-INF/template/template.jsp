@@ -4,7 +4,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-    <html>
+<html>
     <head>
         <tiles:insertAttribute name="head" />
         <script>

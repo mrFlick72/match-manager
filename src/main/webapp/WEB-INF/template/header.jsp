@@ -18,35 +18,31 @@
                             <form action="logIn" method="post" class="form-horizontal">
                                 <div class="row">
                                     <div class="form-group">
-                                        <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">User Name:</span>
-                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        <span class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-4">User Name:</span>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                             <input name="userNameIn" type="text" placeholder="admin" class="form-control"/>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                        <div class="form-group">
-                                            <span class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Password:</span>
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                                <input name="passwordIn" type="password" placeholder="admin" class="form-control"/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                <div class="row">
                                     <div class="form-group">
-                                        <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            not registered? ... <a href="registerForm">register now!!!</a>
-                                        </span>
+                                        <span class="control-label col-lg-4 col-md-4 col-sm-4 col-xs-4">Password:</span>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                            <input name="passwordIn" type="password" placeholder="admin" class="form-control"/>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="form-group">
-                                        <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <button type="submit" class="btn btn-default">log-In</button>
-                                        </span>
+                                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        not registered? ... <a href="registerForm">register now!!!</a>
+                                    </span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <button type="submit" class="btn btn-default">log-In</button>
                                     </div>
                                 </div>
                             </form>
@@ -54,19 +50,17 @@
                         <c:otherwise>
                             <form action="logOut" method="post" class="form-horizontal">
                                 <div class="row">
-                                    <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         Hello! ${referente.nome}
                                         <br/>
                                         Welcome back
                                         <hr/>
-                                    </span>
+                                    </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <button class="btn btn-default" type="submit">log-out</button>
-                                        </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <button class="btn btn-default" type="submit">log-out</button>
                                     </div>
                                 </div>
                             </form>
