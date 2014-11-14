@@ -31,7 +31,7 @@ public class TeamRestServiceImpl implements TeamRestService{
     public String playerIsRegister(AutenticationInfoModelDTO userAuthenticationInfo) {
         Giocatore userName = giocatoreDAO.findByUserName(userAuthenticationInfo.getUserName());
 
-        boolean result = userName==null ? false :(userAuthenticationInfo.getPassword().equals(userName.getPassword()) ? true : false);
+        boolean result = userName != null && (userAuthenticationInfo.getPassword().equals(userName.getPassword()));
         return  jsonSingleResoltFactory.getJsonSingleResoltFactory("result",result);
     }
 

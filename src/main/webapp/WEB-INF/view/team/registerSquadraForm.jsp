@@ -4,17 +4,6 @@
 <div class="sfondo">
     <!--body div-->
         <script>
-/*            $(document).ready(function() {
-                var searchAvaibleMatch = $('#searchAvaibleMatch');
-                var searchAvaibleMatchForm = searchAvaibleMatch.children('form').filter('form');
-
-                searchAvaibleMatch.dialog({
-                    resizable:false,
-                    buttons: {"OK": function() {searchAvaibleMatchForm.submit(); $( this ).dialog( "close" );}}
-                });
-
-            } );*/
-
             $(document).ready(function() {
                 $('#teamCompleteDialog').dialog({autoOpen:false,
                     resizable:false,
@@ -37,11 +26,9 @@
             <fieldset>
                 <div class="row">
                     <div class="form-group">
-                    <span class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        Team Name:
-                    </span>
+                        <label for="teamNameIn" class = "col-lg-1 col-md-1 col-sm-1 col-xs-1">Team Name:</label>
                         <div class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                            <input  class="form-control" name="teamNameIn" type="text">
+                            <input  id="teamNameIn" class="form-control" name="teamNameIn" type="text">
                         </div>
                     </div>
                 </div>
@@ -57,11 +44,9 @@
                             <div class="panel-body">
                                 <table class="dataTableMarker">
                                     <thead>
-                                    <tr>
-                                        <td>First Name</td>
-                                        <td>Last Name</td>
-                                        <td>Join to team</td>
-                                    </tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Join to team</th>
                                     </thead>
                                     <tbody>
                                     <c:forEach items="${giocatoriDisponibili}" var="giocatore">
@@ -85,11 +70,9 @@
                             <div class="panel-body">
                                 <table id="giocatoriInSquadraTable" class="dataTableMarker">
                                     <thead>
-                                    <tr>
-                                        <td>First Name</td>
-                                        <td>Last Name</td>
-                                        <td>Leaves the team</td>
-                                    </tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Leaves the team</th>
                                     </thead>
                                     <tbody>
                                     <c:forEach items="${giocatoriInSquadra}" var="giocatore">

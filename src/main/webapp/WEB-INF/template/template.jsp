@@ -11,6 +11,7 @@
            $(function(){
                initDatePicker();
                initDataTable();
+               initAutoComplete();
             });
         </script>
     </head>

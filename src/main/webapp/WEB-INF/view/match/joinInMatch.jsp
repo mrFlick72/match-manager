@@ -10,18 +10,18 @@
             <form name="searchMatch" action="searchMatch" method="post">
                 <div class="row">
                     <div class="form-group">
-                        <span class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">Date:</span>
+                        <label for="date" class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">Date:</label>
                         <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <input name="date" type="text" class="form-control datePickerMarker" />
+                            <input id="date" name="date" type="text" class="form-control datePickerMarker" />
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group">
-                        <span class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">Campo:</span>
+                        <label for="footballField" class = "col-lg-2 col-md-2 col-sm-2 col-xs-2">Campo:</label>
                         <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <select class="form-control" name="footballField">
+                            <select id="footballField" class="autoCompleteMarker form-control" name="footballField">
                                 <c:forEach items="${campi}" var="campo" >
                                     <option> ${campo} </option>
                                 </c:forEach>
@@ -32,9 +32,9 @@
 
                 <div class="row">
                     <div class="form-group">
-                        <span class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Hour:</span>
+                        <label for="hour" class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Hour:</label>
                         <div class = "col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <select class="form-control" name="hour">
+                            <select id="hour" class="autoCompleteMarker form-control" name="hour">
                                 <c:forEach items="${hours}" var="hour" >
                                     <option> ${hour} </option>
                                 </c:forEach>
@@ -109,7 +109,6 @@
                                         </c:forEach>
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>

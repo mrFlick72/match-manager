@@ -3,7 +3,6 @@ package it.valeriovaudi.matchmanager.service.ws;
 import it.valeriovaudi.matchmanager.service.ws.dto.team.AutenticationInfoModelDTO;
 
 import javax.ws.rs.*;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.

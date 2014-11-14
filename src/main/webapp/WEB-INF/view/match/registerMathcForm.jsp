@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <select class="form-control" name="selectedHour">
+                    <select class="autoCompleteMarker form-control" name="selectedHour">
                         <c:forEach items="${hours}" var = "hour">
                             <option>${hour}</option>
                         </c:forEach>

@@ -22,6 +22,8 @@
 <link rel="stylesheet" href="css/markerClass.css" type="text/css"/>
 <script src="js/markerClass.js"></script>
 
+<link rel="stylesheet" href="js/select2-3.4.3/select2.css" type="text/css"/>
+<script src="js/select2-3.4.3/select2.js"></script>
 
 <script src="js/dataTable/js/jquery.dataTables.min.js"></script>
 <script src="js/indexFrontJScontroller.js"></script>
