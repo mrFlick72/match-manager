@@ -34,6 +34,11 @@ div.sfondo
     background-color: rgb(137, 179, 123);
 }
 
+div.component-container{
+    padding-top: 2px;
+    margin-top: 2px;
+}
+
 div.header
 {
     border: 1px solid black;
