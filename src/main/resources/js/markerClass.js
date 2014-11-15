@@ -3,11 +3,11 @@ function initDataTable(){
 }
 
 function initDatePicker(){
-    var datepickers = $(".datePickerMarker");
+    var datepickers = $('[data-date-picker="datePicker"]');
     datepickers.datepicker({dateFormat: 'dd/mm/yy'});
 }
 
 function initAutoComplete(){
-    var autoCompletes = $(".autoCompletMarker");
-    autoCompleates.select2();
+    var autoCompletes = $('[data-auto-complete="autoComplete"]');
+    autoCompletes.select2();
 }

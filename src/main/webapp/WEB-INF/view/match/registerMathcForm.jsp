@@ -20,28 +20,35 @@
     </script>
 <div class="row">
     <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-        <h1> Choice a day </h1>
-
         <form name="searchAvaibleMatch" method="post" action="searchAvaibleMatch">
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <input name="date" type="text" class="form-control datePickerMarker"/>
+                <div class="form-group">
+                    <label for="date" class="control-label col-lg-1 col-md-1 col-sm-1 col-xs-1">choice a day</label>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <input id="date" name="date" type="text" data-date-picker="datePicker" class="form-control"/>
+                    </div>
                 </div>
+            </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                    <select class="autoCompleteMarker form-control" name="selectedHour">
-                        <c:forEach items="${hours}" var = "hour">
-                            <option>${hour}</option>
-                        </c:forEach>
-                    </select>
+            <div class="row">
+                <div class="form-group">
+                    <label for="selectedHour" class="control-label col-lg-1 col-md-1 col-sm-1 col-xs-1">choice a football field</label>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <select id="selectedHour" data-auto-complete="autoComplete"  class="form-control" name="selectedHour">
+                            <c:forEach items="${hours}" var = "hour">
+                                <option>${hour}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                 </div>
+            </div>
 
+            <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <button class="btn btn-default" type="submit">Search</button>
                 </div>
             </div>
-            </form>
+        </form>
     </div>
 </div>
 
