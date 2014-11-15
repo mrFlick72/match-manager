@@ -10,8 +10,6 @@ import it.valeriovaudi.matchmanager.support.factory.JsonSingleResoltFactory;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

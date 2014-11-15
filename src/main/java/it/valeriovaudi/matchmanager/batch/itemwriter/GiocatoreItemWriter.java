@@ -1,7 +1,6 @@
 package it.valeriovaudi.matchmanager.batch.itemwriter;
 
 import it.valeriovaudi.matchmanager.model.Giocatore;
-import it.valeriovaudi.matchmanager.repository.dao.Interface.GiocatoreDAO;
 import it.valeriovaudi.matchmanager.service.activiti.UserService;
 import org.springframework.batch.item.ItemWriter;
 

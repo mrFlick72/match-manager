@@ -3,10 +3,7 @@ package it.valeriovaudi.matchmanager.batch.fieldsetmapper;
 import it.valeriovaudi.matchmanager.model.Giocatore;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.FieldSet;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.BindException;
-
-import javax.persistence.Column;
 
 /**
  * Created by root on 9/14/14.

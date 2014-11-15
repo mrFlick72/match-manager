@@ -1,11 +1,11 @@
 package it.valeriovaudi.matchmanager.service.ws;
 
 import it.valeriovaudi.matchmanager.support.MatchUtility;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
-import javax.json.*;
-import java.util.Properties;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 
 /**
  * Created with IntelliJ IDEA.

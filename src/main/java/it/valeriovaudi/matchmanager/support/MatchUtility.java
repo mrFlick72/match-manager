@@ -2,9 +2,7 @@ package it.valeriovaudi.matchmanager.support;
 
 import org.springframework.ui.Model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.

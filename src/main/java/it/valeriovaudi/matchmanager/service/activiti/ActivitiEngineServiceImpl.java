@@ -3,7 +3,6 @@ package it.valeriovaudi.matchmanager.service.activiti;
 
 import it.valeriovaudi.matchmanager.model.Giocatore;
 import org.activiti.engine.HistoryService;
-import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricVariableInstance;
@@ -12,7 +11,6 @@ import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 

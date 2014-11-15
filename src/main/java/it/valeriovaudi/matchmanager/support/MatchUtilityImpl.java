@@ -1,9 +1,6 @@
 package it.valeriovaudi.matchmanager.support;
 
 import it.valeriovaudi.matchmanager.service.activiti.ActivitiEngineService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 import java.util.*;

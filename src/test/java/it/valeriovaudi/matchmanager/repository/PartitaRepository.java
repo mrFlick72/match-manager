@@ -4,14 +4,12 @@ import it.valeriovaudi.matchmanager.model.Giocatore;
 import it.valeriovaudi.matchmanager.repository.dao.Interface.GiocatoreDAO;
 import it.valeriovaudi.matchmanager.repository.dao.Interface.PartitaDAO;
 import org.junit.Test;
-import org.junit.experimental.theories.suppliers.TestedOn;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
