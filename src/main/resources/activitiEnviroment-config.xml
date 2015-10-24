@@ -12,7 +12,6 @@
     </bean>
 
     <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
-        <property name="databaseType" value="${db}" />
         <property name="dataSource" ref="activitiEngineDataSource" />
         <property name="transactionManager" ref="activitiTransactionManager" />
         <property name="databaseSchemaUpdate" value="true" />

@@ -441,28 +441,6 @@
         </repository>
     </repositories>
 
-    <profiles>
-        <profile>
-            <id>default</id>
-            <properties>
-                <springProfile>default</springProfile>
-                <db>mysql</db>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>embedded</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
-            <properties>
-                <springProfile>embedded</springProfile>
-                <db>h2</db>
-            </properties>
-        </profile>
-    </profiles>
-
     <build>
         <finalName>Match-Manager</finalName>
 
