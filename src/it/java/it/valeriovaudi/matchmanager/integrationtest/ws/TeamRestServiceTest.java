@@ -1,6 +1,6 @@
-package it.valeriovaudi.matchmanager.service.ws;
+package it.valeriovaudi.matchmanager.integrationtest.ws;
 
-import it.valeriovaudi.matchmanager.builder.team.AutenticationInfoModelDTOJsonBuilder;
+import it.valeriovaudi.matchmanager.integrationtest.ws.team.AutenticationInfoModelDTOJsonBuilder;
 import it.valeriovaudi.matchmanager.service.ws.dto.team.AutenticationInfoModelDTO;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -13,7 +13,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.log4j.Logger;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,7 +30,6 @@ import java.util.Map;
  */
 
 public class TeamRestServiceTest {
-
     private Logger logger = Logger.getLogger(TeamRestServiceTest.class);
 
     private AutenticationInfoModelDTOJsonBuilder autenticationInfoModelDTOJsonBuilder;
@@ -44,16 +42,11 @@ public class TeamRestServiceTest {
     private static final String  playerIsRegisterTestURL = "http://localhost:8080/service/rest/TeamRestService/playerIsRegister";
 
     public int commonHttpClientPostImpl(String url,  Object body)throws IOException {
-
         int status = -1;
 
         CloseableHttpClient client = createHttp();
 
         HttpPost httpPost = new HttpPost(url);
-
-        String stringPart;
-
-        int index = 0;
 
         HttpEntity httpEntity = new StringEntity(body.toString());
         httpPost.addHeader("content-type", "application/json");
@@ -105,7 +98,6 @@ public class TeamRestServiceTest {
     }
 
     private String logResponse(HttpEntity httpEntity) throws IOException {
-
         StringBuilder stringBuilder = new StringBuilder();
 
         InputStream content = httpEntity.getContent();
@@ -129,12 +121,10 @@ public class TeamRestServiceTest {
     }
 
     private CloseableHttpClient createHttp() {
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-
-        return httpclient;
+        return HttpClients.createDefault();
     }
 
-    @Test
+//    @Test
     public void getAllAvaiableMatchTest() throws IOException {
         Map<String,Object> bodyParamiter = new HashMap<String, Object>();
 
@@ -149,11 +139,10 @@ public class TeamRestServiceTest {
         int i = commonHttpClientPostImpl(playerIsRegisterTestURL, autenticationInfoModelDTOJsonBuilder.autenticationInfoModelDTOJsonBuilder(autenticationInfoModelDTO));
 
         logger.info(i);
-
     }
 
 
-    @Test
+//    @Test
     public void playerIsRegisterTest() throws IOException {
         Map<String,Object> bodyParamiter = new HashMap<String, Object>();
 
@@ -162,12 +151,11 @@ public class TeamRestServiceTest {
         autenticationInfoModelDTO.setUserName("valval");
         autenticationInfoModelDTO.setPassword("valval1");
 
-        bodyParamiter.put("authenticationToken",autenticationInfoModelDTOJsonBuilder.autenticationInfoModelDTOJsonBuilder(autenticationInfoModelDTO));
+        bodyParamiter.put("authenticationToken", autenticationInfoModelDTOJsonBuilder.autenticationInfoModelDTOJsonBuilder(autenticationInfoModelDTO));
 
         int i = commonHttpClientPostImpl(playerIsRegisterTestURL, autenticationInfoModelDTOJsonBuilder.autenticationInfoModelDTOJsonBuilder(autenticationInfoModelDTO));
 
         logger.info(i);
-
     }
 
 }

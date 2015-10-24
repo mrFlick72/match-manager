@@ -32,7 +32,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -352,7 +351,6 @@
             <version>4.3.1</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <dependencyManagement>
@@ -435,33 +433,11 @@
                 <version>${spring.batch.version}</version>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
     <repositories>
-        <!-- JBoss Repository used for Java EE 6 pieces -->
-        <repository>
-            <id>repository.jboss.org</id>
-            <name>JBoss Repository</name>
-            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-        </repository>
-
-        <repository>
-            <id>org.springframework.maven.milestone</id>
-            <name>Spring Maven Milestone Repository</name>
-            <url>http://maven.springframework.org/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-   
         <repository>
             <id>Activiti</id>
             <url>http://maven.alfresco.com/nexus/content/repositories/activiti</url>
-        </repository>
-
-        <repository>
-            <id>spring-milestones</id>
-            <url>http://repo.spring.io/libs-milestone</url>
         </repository>
     </repositories>
 
@@ -476,6 +452,10 @@
 
         <profile>
             <id>embedded</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
             <properties>
                 <springProfile>embedded</springProfile>
                 <db>h2</db>
@@ -485,12 +465,14 @@
 
     <build>
         <finalName>Match-Manager</finalName>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -530,10 +512,74 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <path>/Match-Manager</path>
-                    <url>http://${tomcat.server.deploy}/manager/text</url>
-                    <server>mytomcat</server>
+                    <server>localhost</server>
+                    <path>/${project.build.finalName}</path>
+                    <port>8080</port>
+                    <systemProperties>
+                        <spring.profiles.active>embedded</spring.profiles.active>
+                    </systemProperties>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>start-tomcat</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <fork>true</fork>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>stop-tomcat</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>shutdown</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19</version>
+                <configuration>
+                    <includes>
+                        <include>it/valeriovaudi/matchmanager/unit/**</include>
+                    </includes>
+                    <excludes>
+                        <exclude>it/valeriovaudi/matchmanager/integrationtest/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <excludes>
+                        <exclude>it/valeriovaudi/matchmanager/unit/**</exclude>
+                    </excludes>
+                    <includes>
+                        <include>it/valeriovaudi/matchmanager/integrationtest/**</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

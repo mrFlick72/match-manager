@@ -1,8 +1,8 @@
-package it.valeriovaudi.matchmanager.mvc.team;
+package it.valeriovaudi.matchmanager.unit.mvc.team;
 
 import it.valeriovaudi.matchmanager.model.Giocatore;
 import it.valeriovaudi.matchmanager.model.Squadra;
-import it.valeriovaudi.matchmanager.mvc.MvcAbstractTests;
+import it.valeriovaudi.matchmanager.unit.mvc.MvcAbstractTests;
 import it.valeriovaudi.matchmanager.repository.dao.Interface.GiocatoreDAO;
 import it.valeriovaudi.matchmanager.repository.dao.Interface.SquadraDAO;
 import org.junit.Assert;
@@ -29,7 +29,6 @@ public class MvcTeamTests extends MvcAbstractTests {
 
     @Test
     public void getTeamTest() throws Exception {
-
         List<Squadra> all = squadraDAO.findALL();
         Assert.assertNotNull(all);
 
@@ -45,7 +44,6 @@ public class MvcTeamTests extends MvcAbstractTests {
 
     @Test
     public void initRegisterSquadraFormTest() throws Exception {
-
         Giocatore referente = getReferente();
 
         List<Giocatore> giocatoriDisponibili =   giocatoreDAO.findALL();
@@ -61,12 +59,10 @@ public class MvcTeamTests extends MvcAbstractTests {
                             .andExpect(model().attributeExists("giocatoriInSquadra", "giocatoriDisponibili"))
                             .andExpect(model().attribute("giocatoriInSquadra", giocatoriInSquadra))
                             .andExpect(model().attribute("giocatoriDisponibili", giocatoriDisponibili));
-
     }
 
     @Test
     public void teamRegisterTest() throws Exception {
-
         Giocatore referente = getReferente();
 
 
@@ -78,13 +74,9 @@ public class MvcTeamTests extends MvcAbstractTests {
                 .andExpect(redirectedUrl("registerSquadraForm"));
     }
 
-
     private Giocatore getReferente(){
         String userNameIn = "valval";
-
-        Giocatore byCodiceFiscale = giocatoreDAO.findByCodiceFiscale(userNameIn);
-
-        return byCodiceFiscale;
+        return giocatoreDAO.findByCodiceFiscale(userNameIn);
     }
 
     private List<Giocatore> getSquadra(){

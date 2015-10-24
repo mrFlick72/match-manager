@@ -1,14 +1,17 @@
-package it.valeriovaudi.matchmanager.repository;
+package it.valeriovaudi.matchmanager.unit.repository;
 
 import it.valeriovaudi.matchmanager.model.Giocatore;
 import it.valeriovaudi.matchmanager.repository.dao.Interface.GiocatoreDAO;
 import it.valeriovaudi.matchmanager.repository.dao.Interface.PartitaDAO;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,8 +28,11 @@ import java.util.Date;
 @ContextConfiguration(locations = {"classpath:spring-config.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("embedded")
+@Transactional
+@DirtiesContext
 public class PartitaRepository {
-
+    private Logger logger = Logger.getLogger(PartitaRepository.class);
+    
     @Autowired
     private PartitaDAO partitaDAO;
 
@@ -37,17 +43,13 @@ public class PartitaRepository {
 
     @Test
     public void test() throws ParseException {
-
         Giocatore valval = giocatoreDAO.findByUserName("valval");
-        System.out.println("partitaDAO.findAllAvaiableMatch(valval, new Date())");
-        System.out.println(partitaDAO.findAllAvaiableMatch(valval, new Date()));
+        logger.info("partitaDAO.findAllAvaiableMatch(valval, new Date())");
+        logger.info(partitaDAO.findAllAvaiableMatch(valval, new Date()));
 
-        System.out.println("partitaDAO.findAllMatchreserved(valval, new Date())");
+        logger.info("partitaDAO.findAllMatchreserved(valval, new Date())");
         String date = "05/05/2013";
 
-        System.out.println(partitaDAO.findAllMatchReserved(valval, simpleDateFormat.parse(date)));
-
+        logger.info(partitaDAO.findAllMatchReserved(valval, simpleDateFormat.parse(date)));
     }
-
-
 }

@@ -1,4 +1,4 @@
-package it.valeriovaudi.matchmanager.builder.team;
+package it.valeriovaudi.matchmanager.integrationtest.ws.team;
 
 import it.valeriovaudi.matchmanager.service.ws.dto.team.AutenticationInfoModelDTO;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;

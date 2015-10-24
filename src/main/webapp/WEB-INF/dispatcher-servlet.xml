@@ -23,14 +23,6 @@
 
     <mvc:view-controller path="/index" view-name="/index" />
 
-    <!--<bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:viewClass="org.springframework.web.servlet.view.JstlView"
-          p:prefix="/WEB-INF/view/"
-          p:suffix=".jsp"
-          p:order="2"/>-->
-
-
     <bean id="tilesviewResolver"
           class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"
           p:order="1"/>
@@ -69,9 +61,7 @@
                 <ref bean="converterToString"/>
             </set>
         </property>
-
     </bean>
 
     <context:component-scan base-package="it.valeriovaudi.matchmanager.controller"/>
-    
 </beans>

@@ -1,7 +1,7 @@
-package it.valeriovaudi.matchmanager.mvc.player;
+package it.valeriovaudi.matchmanager.unit.mvc.player;
 
 import it.valeriovaudi.matchmanager.model.Giocatore;
-import it.valeriovaudi.matchmanager.mvc.MvcAbstractTests;
+import it.valeriovaudi.matchmanager.unit.mvc.MvcAbstractTests;
 import it.valeriovaudi.matchmanager.repository.dao.Interface.GiocatoreDAO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,7 +21,6 @@ public class PlayerMvcTests extends MvcAbstractTests{
 
     @Test
     public void initGiocatoreFormRegisterTest() throws Exception {
-
         boolean result = mockMvc.perform(get("/registerForm"))
                                 .andExpect(status().isOk())
                                 .andExpect(view().name("registerForm"))
@@ -32,7 +31,6 @@ public class PlayerMvcTests extends MvcAbstractTests{
 
     @Test
     public void registerGiocatorebyFormTest() throws Exception {
-
         String nome="Valerio Test";
         String cognome="Vaudi test";
         String codiceFiscale="ASDF564HBCDFRE56";
@@ -60,8 +58,5 @@ public class PlayerMvcTests extends MvcAbstractTests{
         Assert.assertEquals(mail,byUserName.getMail());
         Assert.assertEquals(user,byUserName.getUserName());
         Assert.assertEquals(password,byUserName.getPassword());
-
     }
-
-
 }

@@ -1,7 +1,7 @@
-package it.valeriovaudi.matchmanager.mvc.logIn;
+package it.valeriovaudi.matchmanager.unit.mvc.logIn;
 
 import it.valeriovaudi.matchmanager.model.Giocatore;
-import it.valeriovaudi.matchmanager.mvc.MvcAbstractTests;
+import it.valeriovaudi.matchmanager.unit.mvc.MvcAbstractTests;
 import it.valeriovaudi.matchmanager.repository.dao.Interface.GiocatoreDAO;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,15 +15,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by seminario on 6/1/14.
  */
-public class logInOutMvcTests extends MvcAbstractTests{
-
+public class logInOutMvcTests extends MvcAbstractTests {
 
     @Autowired
     private GiocatoreDAO giocatoreDAO;
 
     @Test
     public void logInTest() throws Exception {
-
         String userNameIn = "valval";
         String passwordIn = "valval";
 
@@ -40,11 +38,8 @@ public class logInOutMvcTests extends MvcAbstractTests{
 
     @Test
     public void logOutTest() throws Exception {
-
         String userNameIn = "valval";
-
         Giocatore byCodiceFiscale = giocatoreDAO.findByCodiceFiscale(userNameIn);
-
 
          mockMvc.perform(post("/logOut").sessionAttr("referente", byCodiceFiscale))
                                     .andExpect(status().isFound())
@@ -54,10 +49,7 @@ public class logInOutMvcTests extends MvcAbstractTests{
                                         public void match(MvcResult result) throws Exception {
                                             boolean referente = result.getRequest().getSession().getAttributeNames().hasMoreElements();
                                             Assert.assertFalse(referente);
-
                                         }
                                     });
-
-
     }
 }
